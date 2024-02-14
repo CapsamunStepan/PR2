@@ -1,0 +1,40 @@
+{% extends "lab2/base.html" %}
+{% block title %}Send{% endblock %}
+{% block body %}
+<div class="send">
+   {% if sent %}
+       <h1>E-mail successfully sent</h1>
+       <p>
+           Your message was successfully sent
+           to {{ form.cleaned_data.recipient_email }}.
+       </p>
+   {% else %}
+       <h1>Fill form to send e-mail</h1>
+       <form method="post">
+           <div class="form-row">
+               <label for="id_sender_email">Your Email</label>
+               {{ form.sender_email }}
+           </div>
+           <div class="form-row">
+               <label for="id_sender_password">Your Password</label>
+               {{ form.sender_password }}
+           </div>
+           <div class="form-row">
+               <label for="id_recipient_email">Recipient Email</label>
+               {{ form.recipient_email }}
+           </div>
+           <div class="form-row">
+               <label for="id_subject">Subject</label>
+               {{ form.subject }}
+           </div>
+           <div class="form-row">
+               <label for="id_message">Message</label>
+               {{ form.message }}
+           </div>
+           {% csrf_token %}
+           <input type="submit" value="Send e-mail">
+       </form>
+   {% endif %}
+</div>
+
+{% endblock %}

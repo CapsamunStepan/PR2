@@ -1,0 +1,35 @@
+{% extends "lab2/base.html" %}
+{% block title %}Inbox{% endblock %}
+{% block body %}
+<div class="inbox">
+    {% if get %}
+        <h1>Your inbox: </h1>
+        {% for email_id, email_info in messages.items %}
+            <div class="message">
+                <p>From: {{ email_info.From }}</p>
+                <p>Subject: {{ email_info.Subject }}</p>
+                <p>Date: {{ email_info.Date }}</p>
+                <p>Body: {{ email_info.Body }}</p>
+            </div>
+        {% endfor %}
+
+    {% else %}
+        <h1>Fill form to check inbox</h1>
+        <form method="post">
+           <div class="form-row">
+               <label for="id_email">Your Email</label>
+               {{ form.email }}
+           </div>
+           <div class="form-row">
+               <label for="id_password">Your Password</label>
+               {{ form.password }}
+           </div>
+           {% csrf_token %}
+           <input type="submit" value="Check inbox">
+       </form>
+    {% endif %}
+
+
+</div>
+
+{% endblock %}
